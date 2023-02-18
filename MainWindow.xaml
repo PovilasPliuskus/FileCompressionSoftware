@@ -19,7 +19,7 @@
                 <Button Content="Decompress" Margin="5" Width="80" IsEnabled="False"/>
                 <Button Content="Encrypt" Margin="5" Width="80" IsEnabled="False"/>
             </StackPanel>
-            <Border BorderBrush="Gray" BorderThickness="1" Margin="10" Grid.Row="1">
+            <Border BorderBrush="Gray" BorderThickness="1" Margin="10" Grid.Row="1" MouseLeftButtonDown="Border_MouseLeftButtonDown" Background="White">
                 <TextBlock Text="Drag and drop files here" Foreground="Gray" VerticalAlignment="Center" HorizontalAlignment="Center" />
             </Border>
         </Grid>

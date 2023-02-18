@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Diagnostics;
 
 namespace FileCompressionSoftware
 {
@@ -24,5 +25,11 @@ namespace FileCompressionSoftware
         {
             InitializeComponent();
         }
+
+        private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Process.Start("explorer.exe");
+        }
     }
+
 }
