@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Diagnostics;
+using Microsoft.Win32;
 
 namespace FileCompressionSoftware
 {
@@ -28,7 +28,16 @@ namespace FileCompressionSoftware
 
         private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            Process.Start("explorer.exe");
+            // Changing implementation of openning explorer that it allows to choose a file
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.FilterIndex = 1;
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                string selectedFile = openFileDialog.FileName;
+                MessageBox.Show("Selected file: " + selectedFile);
+
+            }
         }
     }
 
