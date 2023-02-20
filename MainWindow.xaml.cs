@@ -28,6 +28,9 @@ namespace FileCompressionSoftware
             InitializeComponent();
         }
 
+        // selectedFileURL - the absolute address of the file
+        string selectedFileURL;
+
         private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -35,9 +38,8 @@ namespace FileCompressionSoftware
 
             if (openFileDialog.ShowDialog() == true)
             {
-                // selectedFile - the absolute address of the file
-                string selectedFile = openFileDialog.FileName;
-                string fileName = System.IO.Path.GetFileName(selectedFile);
+                selectedFileURL = openFileDialog.FileName;
+                string fileName = System.IO.Path.GetFileName(selectedFileURL);
                 DADTextBlock.Text = "Selected file: " + fileName;
                 DADTextBlock.Foreground = Brushes.Black;
                 DADTextBlock.VerticalAlignment = VerticalAlignment.Top;
@@ -98,7 +100,7 @@ namespace FileCompressionSoftware
 
         private void CompressButton_Click(object sender, RoutedEventArgs e)
         {
-            Compress compress = new Compress();
+            Compress compress = new Compress(selectedFileURL);
             compress.ShowDialog();
         }
     }

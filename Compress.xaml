@@ -17,36 +17,36 @@
 
         <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center">
             <TextBlock Text="Select a document:" Margin="10 0 56 0"/>
-            <TextBox Text="" Width="540"/>
-            <Button Content="Browse" Margin="10 0 10 0" Width="60"/>
+            <TextBox Text="" Width="540" x:Name="SelectedDocumentTextBox"/>
+            <Button Content="Browse" Margin="10 0 10 0" Width="60" x:Name="SelectedDocumentButton" Click="SelectedDocumentButton_Click"/>
         </StackPanel>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center">
             <TextBlock Text="Location of compressed file:" Margin="10 0 10 0"/>
-            <TextBox Text="" Width="540"/>
-            <Button Content="Browse" Margin="10 0 10 0" Width="60"/>
+            <TextBox Text="" Width="540" x:Name="CompressedDocumentTextBox"/>
+            <Button Content="Browse" Margin="10 0 10 0" Width="60" x:Name="CompressedDocumentButton" Click="CompressedDocumentButton_Click"/>
         </StackPanel>
 
         <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center">
             <GroupBox Header="Choose Algorithm" Margin="10 0 10 0">
                 <StackPanel>
-                    <RadioButton Content="Huffman"/>
-                    <RadioButton Content="LZ" IsEnabled="False"/>
+                    <RadioButton Content="Huffman" IsChecked="True" x:Name="HuffmanRadioButton"/>
+                    <RadioButton Content="LZ" x:Name="LZRadioButton"/>
                 </StackPanel>
             </GroupBox>
             <GroupBox Header="File Information" Margin="10 0 10 0">
                 <StackPanel Width="620">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="File Name: " Margin="0 0 47 0"/>
-                        <TextBlock Text=""/>
+                        <TextBlock Text="" x:Name="FileName"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="File Size: " Margin="0 0 58 0"/>
-                        <TextBlock Text=""/>
+                        <TextBlock Text="" x:Name="FileSize"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Modification Date: " Margin="0 0 5 0"/>
-                        <TextBlock Text=""/>
+                        <TextBlock Text="" x:Name="ModificationDate"/>
                     </StackPanel>
                 </StackPanel>
             </GroupBox>
