@@ -19,3 +19,5 @@ C:\Users\user\Documents\Programming\FileCompressionSoftware\obj\Debug\net6.0-win
 C:\Users\user\Documents\Programming\FileCompressionSoftware\obj\Debug\net6.0-windows\FileCompressionSoftware.pdb
 C:\Users\user\Documents\Programming\FileCompressionSoftware\obj\Debug\net6.0-windows\FileCompressionSoftware.genruntimeconfig.cache
 C:\Users\user\Documents\Programming\FileCompressionSoftware\obj\Debug\net6.0-windows\ref\FileCompressionSoftware.dll
+C:\Users\user\Documents\Programming\FileCompressionSoftware\obj\Debug\net6.0-windows\Compress.g.cs
+C:\Users\user\Documents\Programming\FileCompressionSoftware\obj\Debug\net6.0-windows\Compress.baml

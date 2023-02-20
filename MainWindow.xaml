@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:FileCompressionSoftware"
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="500"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Border BorderThickness="7">
         <Grid>
             <Grid.RowDefinitions>
@@ -15,7 +15,7 @@
             </Grid.RowDefinitions>
             
             <StackPanel Name="ButtonStackPanel" Orientation="Horizontal" Grid.Row="0">
-                <Button Content="Compress" x:Name="CompressButton" Margin="5" Width="80" IsEnabled="False"/>
+                <Button Content="Compress" x:Name="CompressButton" Margin="5" Width="80" IsEnabled="False" Click="CompressButton_Click"/>
                 <Button Content="Decompress" Margin="5" Width="80" IsEnabled="False"/>
                 <Button Content="Encrypt" x:Name="EncryptButton" Margin="5" Width="80" IsEnabled="False"/>
             </StackPanel>

@@ -95,6 +95,12 @@ namespace FileCompressionSoftware
 
             e.Handled = true;
         }
+
+        private void CompressButton_Click(object sender, RoutedEventArgs e)
+        {
+            Compress compress = new Compress();
+            compress.ShowDialog();
+        }
     }
 
 }
