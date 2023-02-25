@@ -4,10 +4,12 @@ C:\Users\user\Documents\Programming\FileCompressionSoftware\bin\Debug\net6.0-win
 C:\Users\user\Documents\Programming\FileCompressionSoftware\bin\Debug\net6.0-windows\FileCompressionSoftware.dll
 C:\Users\user\Documents\Programming\FileCompressionSoftware\bin\Debug\net6.0-windows\FileCompressionSoftware.pdb
 C:\Users\user\Documents\Programming\FileCompressionSoftware\obj\Debug\net6.0-windows\FileCompressionSoftware.csproj.AssemblyReference.cache
+C:\Users\user\Documents\Programming\FileCompressionSoftware\obj\Debug\net6.0-windows\Compress.g.cs
 C:\Users\user\Documents\Programming\FileCompressionSoftware\obj\Debug\net6.0-windows\MainWindow.g.cs
 C:\Users\user\Documents\Programming\FileCompressionSoftware\obj\Debug\net6.0-windows\App.g.cs
 C:\Users\user\Documents\Programming\FileCompressionSoftware\obj\Debug\net6.0-windows\FileCompressionSoftware_MarkupCompile.cache
 C:\Users\user\Documents\Programming\FileCompressionSoftware\obj\Debug\net6.0-windows\FileCompressionSoftware_MarkupCompile.lref
+C:\Users\user\Documents\Programming\FileCompressionSoftware\obj\Debug\net6.0-windows\Compress.baml
 C:\Users\user\Documents\Programming\FileCompressionSoftware\obj\Debug\net6.0-windows\MainWindow.baml
 C:\Users\user\Documents\Programming\FileCompressionSoftware\obj\Debug\net6.0-windows\FileCompressionSoftware.g.resources
 C:\Users\user\Documents\Programming\FileCompressionSoftware\obj\Debug\net6.0-windows\FileCompressionSoftware.GeneratedMSBuildEditorConfig.editorconfig
@@ -19,5 +21,3 @@ C:\Users\user\Documents\Programming\FileCompressionSoftware\obj\Debug\net6.0-win
 C:\Users\user\Documents\Programming\FileCompressionSoftware\obj\Debug\net6.0-windows\FileCompressionSoftware.pdb
 C:\Users\user\Documents\Programming\FileCompressionSoftware\obj\Debug\net6.0-windows\FileCompressionSoftware.genruntimeconfig.cache
 C:\Users\user\Documents\Programming\FileCompressionSoftware\obj\Debug\net6.0-windows\ref\FileCompressionSoftware.dll
-C:\Users\user\Documents\Programming\FileCompressionSoftware\obj\Debug\net6.0-windows\Compress.g.cs
-C:\Users\user\Documents\Programming\FileCompressionSoftware\obj\Debug\net6.0-windows\Compress.baml
