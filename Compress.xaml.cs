@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.IO;
+using System.Diagnostics;
 
 namespace FileCompressionSoftware
 {
@@ -69,6 +70,18 @@ namespace FileCompressionSoftware
             {
                 CompressedDocumentTextBox.Text = saveFileDialog.FileName;
             }
+        }
+
+        private void CompressionButton_Click(object sender, RoutedEventArgs e)
+        {
+            // \\ - zemyn
+            // ..\\ - virsu
+            string HuffmanAlgorithm = @"..\\..\\..\\HuffmanAlgorithm\\main.exe";
+            string inputFile = SelectedDocumentTextBox.Text;
+            string outputFile = CompressedDocumentTextBox.Text;
+
+            ProcessStartInfo startInfo= new ProcessStartInfo(HuffmanAlgorithm, $"{inputFile} {outputFile}");
+            Process.Start(startInfo);
         }
     }
 }
