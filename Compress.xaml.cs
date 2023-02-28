@@ -74,14 +74,26 @@ namespace FileCompressionSoftware
 
         private void CompressionButton_Click(object sender, RoutedEventArgs e)
         {
-            // \\ - zemyn
-            // ..\\ - virsu
-            string HuffmanAlgorithm = @"..\\..\\..\\HuffmanAlgorithm\\main.exe";
-            string inputFile = SelectedDocumentTextBox.Text;
-            string outputFile = CompressedDocumentTextBox.Text;
+            if (HuffmanRadioButton.IsChecked == true)
+            {
+                string HuffmanAlgorithm = @"..\\..\\..\\HuffmanAlgorithm\\main.exe";
+                string inputFile = SelectedDocumentTextBox.Text;
+                string outputFile = CompressedDocumentTextBox.Text;
 
-            ProcessStartInfo startInfo= new ProcessStartInfo(HuffmanAlgorithm, $"{inputFile} {outputFile}");
-            Process.Start(startInfo);
+                ProcessStartInfo startInfo = new ProcessStartInfo(HuffmanAlgorithm, $"{inputFile} {outputFile}");
+                Process.Start(startInfo);
+            }
+            else if (LZRadioButton.IsChecked == true)
+            {
+                string LZAlgorithm = @"..\\..\\..\\LZAlgorithm\\LZAlgorithm.exe";
+                string inputFile = SelectedDocumentTextBox.Text;
+                string outputFile = CompressedDocumentTextBox.Text;
+
+
+                ProcessStartInfo startInfo = new ProcessStartInfo(LZAlgorithm, $"{inputFile} {outputFile}");
+                Process.Start(startInfo);
+            }
+
         }
     }
 }
