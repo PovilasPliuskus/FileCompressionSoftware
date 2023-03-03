@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.IO;
 using System.Diagnostics;
+using System.Reflection;
 
 namespace FileCompressionSoftware
 {
@@ -76,11 +77,13 @@ namespace FileCompressionSoftware
         {
             // \\ - zemyn
             // ..\\ - virsu
+
             string HuffmanAlgorithm = @"..\\..\\..\\HuffmanAlgorithm\\main.exe";
             string inputFile = SelectedDocumentTextBox.Text;
             string outputFile = CompressedDocumentTextBox.Text;
-
+            
             ProcessStartInfo startInfo= new ProcessStartInfo(HuffmanAlgorithm, $"{inputFile} {outputFile}");
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Maximized;
             Process.Start(startInfo);
         }
     }
