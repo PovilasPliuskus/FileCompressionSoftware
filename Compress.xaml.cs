@@ -72,28 +72,124 @@ namespace FileCompressionSoftware
             }
         }
 
-        private void CompressionButton_Click(object sender, RoutedEventArgs e)
+        private async void CompressionButton_Click(object sender, RoutedEventArgs e)
         {
+            if (CheckIfValidInput() == false)
+            {
+                return;
+            }
             if (HuffmanRadioButton.IsChecked == true)
             {
+                StatusTextBlock.Text = "Compressing";
+                StatusTextBlock.Background = Brushes.Yellow;
+
                 string HuffmanAlgorithm = @"..\\..\\..\\HuffmanAlgorithm\\main.exe";
                 string inputFile = SelectedDocumentTextBox.Text;
                 string outputFile = CompressedDocumentTextBox.Text;
 
-                ProcessStartInfo startInfo = new ProcessStartInfo(HuffmanAlgorithm, $"{inputFile} {outputFile}");
-                Process.Start(startInfo);
+                await Task.Run(() =>
+                {
+                    ProcessStartInfo startInfo = new ProcessStartInfo(HuffmanAlgorithm, $"{inputFile} {outputFile}")
+                    {
+                        CreateNoWindow = true
+                    };
+                    Process process = Process.Start(startInfo);
+                    process.WaitForExit();
+
+                    if (process.ExitCode == 0)
+                    {
+                        Dispatcher.Invoke(() =>
+                        {
+                            StatusTextBlock.Text = "Successfully Compressed";
+                            StatusTextBlock.Background = Brushes.Green;
+                        });
+                    }
+                    else
+                    {
+                        Dispatcher.Invoke(() =>
+                        {
+                            StatusTextBlock.Text = "Compression Failed";
+                            StatusTextBlock.Background = Brushes.Red;
+                        });
+                    }
+                });
             }
             else if (LZRadioButton.IsChecked == true)
             {
+                StatusTextBlock.Text = "Compressing";
+                StatusTextBlock.Background = Brushes.Yellow;
+
                 string LZAlgorithm = @"..\\..\\..\\LZAlgorithm\\LZAlgorithm.exe";
                 string inputFile = SelectedDocumentTextBox.Text;
                 string outputFile = CompressedDocumentTextBox.Text;
 
+                await Task.Run(() =>
+                {
+                    ProcessStartInfo startInfo = new ProcessStartInfo(LZAlgorithm, $"{inputFile} {outputFile}")
+                    {
+                        CreateNoWindow = true
+                    };
+                    Process process = Process.Start(startInfo);
+                    process.WaitForExit();
 
-                ProcessStartInfo startInfo = new ProcessStartInfo(LZAlgorithm, $"{inputFile} {outputFile}");
-                Process.Start(startInfo);
+                    if (process.ExitCode == 0)
+                    {
+                        Dispatcher.Invoke(() =>
+                        {
+                            StatusTextBlock.Text = "Successfully Compressed";
+                            StatusTextBlock.Background = Brushes.Green;
+                        });
+                    }
+                    else
+                    {
+                        Dispatcher.Invoke(() =>
+                        {
+                            StatusTextBlock.Text = "Compression Failed";
+                            StatusTextBlock.Background = Brushes.Red;
+                        });
+                    }
+                });
             }
+        }
 
+        public bool CheckIfValidInput()
+        {
+            if (SelectedDocumentTextBox.Text == "")
+            {
+                MessageBox.Show("No document selected for compression");
+                return false;
+            }
+            if (CompressedDocumentTextBox.Text == "")
+            {
+                MessageBox.Show("Please select compressed document location");
+                return false;
+            }
+            if (!File.Exists(SelectedDocumentTextBox.Text))
+            {
+                MessageBox.Show("Could not locate the selected document for compression");
+                return false;
+            }
+            return true;
+        }
+
+        private void HuffmanRadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            if (CompressedDocumentTextBox.Text != "")
+            {
+                string tempString = CompressedDocumentTextBox.Text;
+                string currentExtension = System.IO.Path.GetExtension(CompressedDocumentTextBox.Text);
+                CompressedDocumentTextBox.Text = tempString.Substring(0, tempString.Length - currentExtension.Length) + ".hfm";
+            }
+        }
+
+        private void LZRadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            if (CompressedDocumentTextBox.Text != "")
+            {
+                string tempString = CompressedDocumentTextBox.Text;
+                string currentExtension = System.IO.Path.GetExtension(CompressedDocumentTextBox.Text);
+                CompressedDocumentTextBox.Text = tempString.Substring(0, tempString.Length - currentExtension.Length) + ".lz";
+            }
         }
     }
 }
