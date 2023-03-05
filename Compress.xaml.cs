@@ -72,16 +72,158 @@ namespace FileCompressionSoftware
             }
         }
 
-        private void CompressionButton_Click(object sender, RoutedEventArgs e)
+        private async void CompressionButton_Click(object sender, RoutedEventArgs e)
         {
-            // \\ - zemyn
-            // ..\\ - virsu
-            string HuffmanAlgorithm = @"..\\..\\..\\HuffmanAlgorithm\\main.exe";
-            string inputFile = SelectedDocumentTextBox.Text;
-            string outputFile = CompressedDocumentTextBox.Text;
+            if (CheckIfValidInput() == false)
+            {
+                return;
+            }
+            if (HuffmanRadioButton.IsChecked == true)
+            {
+                StatusTextBlock.Text = "Compressing";
+                StatusTextBlock.Background = Brushes.Yellow;
 
-            ProcessStartInfo startInfo= new ProcessStartInfo(HuffmanAlgorithm, $"{inputFile} {outputFile}");
-            Process.Start(startInfo);
+                string HuffmanAlgorithm = @"..\\..\\..\\HuffmanAlgorithm\\main.exe";
+                string inputFile = SelectedDocumentTextBox.Text;
+                string outputFile = CompressedDocumentTextBox.Text;
+
+                int estimatedTimeInSeconds = 30;
+
+                await Task.Run(() =>
+                {
+                    ProcessStartInfo startInfo = new ProcessStartInfo(HuffmanAlgorithm, $"{inputFile} {outputFile}")
+                    {
+                        CreateNoWindow = true
+                    };
+                    Process process = Process.Start(startInfo);
+
+                    while (!process.WaitForExit(100))
+                    {
+
+                        Dispatcher.Invoke(() =>
+                        {
+                            double progress = 0;
+                            if (estimatedTimeInSeconds > 0)
+                            {
+                                progress = ((double)process.TotalProcessorTime.Ticks / (double)TimeSpan.TicksPerSecond) / (double)estimatedTimeInSeconds;
+                            }
+                            CompressionProgressBar.Value = progress * 100;
+                        });
+                    }
+
+                    if (process.ExitCode == 0)
+                    {
+                        Dispatcher.Invoke(() =>
+                        {
+                            StatusTextBlock.Text = "Successfully Compressed";
+                            StatusTextBlock.Background = Brushes.Green;
+                            CompressionProgressBar.Value = 100;
+                        });
+                    }
+                    else
+                    {
+                        Dispatcher.Invoke(() =>
+                        {
+                            StatusTextBlock.Text = "Compression Failed";
+                            StatusTextBlock.Background = Brushes.Red;
+                            CompressionProgressBar.Value = 0;
+                        });
+                    }
+                });
+            }
+            else if (LZRadioButton.IsChecked == true)
+            {
+                StatusTextBlock.Text = "Compressing";
+                StatusTextBlock.Background = Brushes.Yellow;
+
+                string LZAlgorithm = @"..\\..\\..\\LZAlgorithm\\LZAlgorithm.exe";
+                string inputFile = SelectedDocumentTextBox.Text;
+                string outputFile = CompressedDocumentTextBox.Text;
+
+                int estimatedTimeInSeconds = 60;
+
+                await Task.Run(() =>
+                {
+                    ProcessStartInfo startInfo = new ProcessStartInfo(LZAlgorithm, $"{inputFile} {outputFile}")
+                    {
+                        CreateNoWindow = true
+                    };
+                    Process process = Process.Start(startInfo);
+
+                    while (!process.WaitForExit(100))
+                    {
+
+                        Dispatcher.Invoke(() =>
+                        {
+                            double progress = 0;
+                            if (estimatedTimeInSeconds > 0)
+                            {
+                                progress = ((double)process.TotalProcessorTime.Ticks / (double)TimeSpan.TicksPerSecond) / (double)estimatedTimeInSeconds;
+                            }
+                            CompressionProgressBar.Value = progress * 100;
+                        });
+                    }
+
+                    if (process.ExitCode == 0)
+                    {
+                        Dispatcher.Invoke(() =>
+                        {
+                            StatusTextBlock.Text = "Successfully Compressed";
+                            StatusTextBlock.Background = Brushes.Green;
+                            CompressionProgressBar.Value = 100;
+                        });
+                    }
+                    else
+                    {
+                        Dispatcher.Invoke(() =>
+                        {
+                            StatusTextBlock.Text = "Compression Failed";
+                            StatusTextBlock.Background = Brushes.Red;
+                            CompressionProgressBar.Value = 0;
+                        });
+                    }
+                });
+            }
+        }
+
+        public bool CheckIfValidInput()
+        {
+            if (SelectedDocumentTextBox.Text == "")
+            {
+                MessageBox.Show("No document selected for compression");
+                return false;
+            }
+            if (CompressedDocumentTextBox.Text == "")
+            {
+                MessageBox.Show("Please select compressed document location");
+                return false;
+            }
+            if (!File.Exists(SelectedDocumentTextBox.Text))
+            {
+                MessageBox.Show("Could not locate the selected document for compression");
+                return false;
+            }
+            return true;
+        }
+
+        private void HuffmanRadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            if (CompressedDocumentTextBox.Text != "")
+            {
+                string tempString = CompressedDocumentTextBox.Text;
+                string currentExtension = System.IO.Path.GetExtension(CompressedDocumentTextBox.Text);
+                CompressedDocumentTextBox.Text = tempString.Substring(0, tempString.Length - currentExtension.Length) + ".hfm";
+            }
+        }
+
+        private void LZRadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            if (CompressedDocumentTextBox.Text != "")
+            {
+                string tempString = CompressedDocumentTextBox.Text;
+                string currentExtension = System.IO.Path.GetExtension(CompressedDocumentTextBox.Text);
+                CompressedDocumentTextBox.Text = tempString.Substring(0, tempString.Length - currentExtension.Length) + ".lz";
+            }
         }
     }
 }
