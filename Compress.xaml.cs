@@ -84,7 +84,7 @@ namespace FileCompressionSoftware
                 StatusTextBlock.Text = "Compressing";
                 StatusTextBlock.Background = Brushes.Yellow;
 
-                string HuffmanAlgorithm = @"..\\..\\..\\HuffmanAlgorithm\\test.exe";
+                string HuffmanAlgorithm = @"..\\..\\..\\HuffmanAlgorithm\\hfmCompress.exe";
                 string inputFile = SelectedDocumentTextBox.Text;
                 string outputFile = CompressedDocumentTextBox.Text;
 
