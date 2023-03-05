@@ -149,7 +149,7 @@ namespace FileCompressionSoftware {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/FileCompressionSoftware;V1.0.0.0;component/compress.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/FileCompressionSoftware;component/compress.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\Compress.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

@@ -14,7 +14,7 @@ int main(int argc, char **argv)
 	//huffmanUser->encode(argv[1], argv[2]);
 	huffmanUser->decode(argv[1], argv[2]);
 
-	delete huffmanUser;
+	//delete huffmanUser;
 
 	return 0;
 }
