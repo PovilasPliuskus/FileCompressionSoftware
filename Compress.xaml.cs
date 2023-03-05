@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.IO;
 using System.Diagnostics;
+using System.Reflection;
 
 namespace FileCompressionSoftware
 {
@@ -74,6 +75,7 @@ namespace FileCompressionSoftware
 
         private async void CompressionButton_Click(object sender, RoutedEventArgs e)
         {
+<<<<<<< HEAD
             if (CheckIfValidInput() == false)
             {
                 return;
@@ -224,6 +226,18 @@ namespace FileCompressionSoftware
                 string currentExtension = System.IO.Path.GetExtension(CompressedDocumentTextBox.Text);
                 CompressedDocumentTextBox.Text = tempString.Substring(0, tempString.Length - currentExtension.Length) + ".lz";
             }
+=======
+            // \\ - zemyn
+            // ..\\ - virsu
+
+            string HuffmanAlgorithm = @"..\\..\\..\\HuffmanAlgorithm\\main.exe";
+            string inputFile = SelectedDocumentTextBox.Text;
+            string outputFile = CompressedDocumentTextBox.Text;
+            
+            ProcessStartInfo startInfo= new ProcessStartInfo(HuffmanAlgorithm, $"{inputFile} {outputFile}");
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Maximized;
+            Process.Start(startInfo);
+>>>>>>> a54f32e1f94fc52b969120096d71b273ec58adee
         }
     }
 }

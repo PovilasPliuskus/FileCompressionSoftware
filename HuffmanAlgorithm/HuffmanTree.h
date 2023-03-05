@@ -27,7 +27,7 @@ private:
 	};
 	
 	Node* root;
-	std::priority_queue<Node*, std::vector<Node*>, compare> heap; // minHeap
+	std::priority_queue<Node*, std::vector<Node*>, compare> heap;
 
 	void traverse(Node* root, std::string code, std::unordered_map<unsigned char, std::string>& huffmanCodes);
 	void free(Node* root);
