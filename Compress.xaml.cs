@@ -87,6 +87,8 @@ namespace FileCompressionSoftware
                 string inputFile = SelectedDocumentTextBox.Text;
                 string outputFile = CompressedDocumentTextBox.Text;
 
+                int estimatedTimeInSeconds = 30;
+
                 await Task.Run(() =>
                 {
                     ProcessStartInfo startInfo = new ProcessStartInfo(HuffmanAlgorithm, $"{inputFile} {outputFile}")
@@ -94,7 +96,20 @@ namespace FileCompressionSoftware
                         CreateNoWindow = true
                     };
                     Process process = Process.Start(startInfo);
-                    process.WaitForExit();
+
+                    while (!process.WaitForExit(100))
+                    {
+
+                        Dispatcher.Invoke(() =>
+                        {
+                            double progress = 0;
+                            if (estimatedTimeInSeconds > 0)
+                            {
+                                progress = ((double)process.TotalProcessorTime.Ticks / (double)TimeSpan.TicksPerSecond) / (double)estimatedTimeInSeconds;
+                            }
+                            CompressionProgressBar.Value = progress * 100;
+                        });
+                    }
 
                     if (process.ExitCode == 0)
                     {
@@ -102,6 +117,7 @@ namespace FileCompressionSoftware
                         {
                             StatusTextBlock.Text = "Successfully Compressed";
                             StatusTextBlock.Background = Brushes.Green;
+                            CompressionProgressBar.Value = 100;
                         });
                     }
                     else
@@ -110,6 +126,7 @@ namespace FileCompressionSoftware
                         {
                             StatusTextBlock.Text = "Compression Failed";
                             StatusTextBlock.Background = Brushes.Red;
+                            CompressionProgressBar.Value = 0;
                         });
                     }
                 });
@@ -123,6 +140,8 @@ namespace FileCompressionSoftware
                 string inputFile = SelectedDocumentTextBox.Text;
                 string outputFile = CompressedDocumentTextBox.Text;
 
+                int estimatedTimeInSeconds = 60;
+
                 await Task.Run(() =>
                 {
                     ProcessStartInfo startInfo = new ProcessStartInfo(LZAlgorithm, $"{inputFile} {outputFile}")
@@ -130,7 +149,20 @@ namespace FileCompressionSoftware
                         CreateNoWindow = true
                     };
                     Process process = Process.Start(startInfo);
-                    process.WaitForExit();
+
+                    while (!process.WaitForExit(100))
+                    {
+
+                        Dispatcher.Invoke(() =>
+                        {
+                            double progress = 0;
+                            if (estimatedTimeInSeconds > 0)
+                            {
+                                progress = ((double)process.TotalProcessorTime.Ticks / (double)TimeSpan.TicksPerSecond) / (double)estimatedTimeInSeconds;
+                            }
+                            CompressionProgressBar.Value = progress * 100;
+                        });
+                    }
 
                     if (process.ExitCode == 0)
                     {
@@ -138,6 +170,7 @@ namespace FileCompressionSoftware
                         {
                             StatusTextBlock.Text = "Successfully Compressed";
                             StatusTextBlock.Background = Brushes.Green;
+                            CompressionProgressBar.Value = 100;
                         });
                     }
                     else
@@ -146,6 +179,7 @@ namespace FileCompressionSoftware
                         {
                             StatusTextBlock.Text = "Compression Failed";
                             StatusTextBlock.Background = Brushes.Red;
+                            CompressionProgressBar.Value = 0;
                         });
                     }
                 });
