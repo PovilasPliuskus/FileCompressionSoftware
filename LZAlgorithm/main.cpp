@@ -1,11 +1,9 @@
+#include<iostream>
 #include"LZAlgorithm.h"
-#include"tree.h"
+using namespace std;
 
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
-    std::cout << "argv[0]: " << argv[0] << "\n";
-    std::cout << "argv[1]: " << argv[1] << "\n";
-    std::cout << "argv[2]: " << argv[2] << "\n";
-
-    return 0;
+    compress(argv[1], argv[2]);
+    decompress(argv[2], "rez.docx");
 }
