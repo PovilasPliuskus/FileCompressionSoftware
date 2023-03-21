@@ -5,5 +5,5 @@ using namespace std;
 int main(int argc, char* argv[])
 {
     compress(argv[1], argv[2]);
-    decompress(argv[2], "rez.docx");
+    decompress(argv[1], argv[2]);
 }
