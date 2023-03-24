@@ -137,7 +137,7 @@ namespace FileCompressionSoftware
                 StatusTextBlock.Text = "Compressing";
                 StatusTextBlock.Background = Brushes.Yellow;
 
-                string LZAlgorithm = @"..\\..\\..\\LZAlgorithm\\LZAlgorithm.exe";
+                string LZAlgorithm = @"..\\..\\..\\LZAlgorithm\\LZCompress.exe";
                 string inputFile = SelectedDocumentTextBox.Text;
                 string outputFile = CompressedDocumentTextBox.Text;
 
