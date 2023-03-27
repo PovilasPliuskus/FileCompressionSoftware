@@ -46,6 +46,7 @@ namespace FileCompressionSoftware
                 DADTextBlock.HorizontalAlignment= HorizontalAlignment.Left;
                 CompressButton.IsEnabled = true;
                 EncryptButton.IsEnabled = true;
+                DecompressButton.IsEnabled = true;
             }
         }
 
@@ -102,6 +103,12 @@ namespace FileCompressionSoftware
         {
             Compress compress = new Compress(selectedFileURL);
             compress.ShowDialog();
+        }
+
+        private void DecompressButton_Click(object sender, RoutedEventArgs e)
+        {
+            Decompress decompress = new Decompress(selectedFileURL);
+            decompress.ShowDialog();
         }
     }
 
