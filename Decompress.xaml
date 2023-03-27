@@ -27,6 +27,23 @@
             <Button Content="Browse" Margin="10 0 10 0" Width="60" x:Name="DecompressedDocumentButton" Click="DecompressedDocumentButton_Click"/>
         </StackPanel>
 
+        <GroupBox Grid.Row="2" Header="File Information" Width="auto">
+            <StackPanel Width="auto">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="File Name: " Margin="0 0 47 0"/>
+                    <TextBlock Text="" x:Name="FileName"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="File Size: " Margin="0 0 58 0"/>
+                    <TextBlock Text="" x:Name="FileSize"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Modification Date: " Margin="0 0 5 0"/>
+                    <TextBlock Text="" x:Name="ModificationDate"/>
+                </StackPanel>
+            </StackPanel>
+        </GroupBox>
+
         <StackPanel Orientation="Horizontal" Grid.Row="3" VerticalAlignment="Center">
             <Button Content="Start Decompression" Margin="10 0 10 0" Width="120" x:Name="DecompressionButton" Click="DecompressionButton_Click"/>
             <ProgressBar Width="640" Name="CompressionProgressBar" Minimum="0" Maximum="100" Foreground="Green" />

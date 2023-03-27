@@ -29,6 +29,19 @@ namespace FileCompressionSoftware
         {
             InitializeComponent();
             SelectedDocumentTextBox.Text = selectedFileURL;
+            FillFileInformation();
+        }
+
+        public void FillFileInformation()
+        {
+            // file name
+            FileName.Text = System.IO.Path.GetFileName(SelectedDocumentTextBox.Text);
+            // file size
+            FileInfo fileInfo = new FileInfo(SelectedDocumentTextBox.Text);
+            FileSize.Text = System.Math.Ceiling(fileInfo.Length / 1024.0).ToString() + " KB";
+            // convertion date
+            DateTime now = DateTime.Now;
+            ModificationDate.Text = now.ToString("yyyy-MM-dd HH:mm:ss");
         }
 
         private void SelectedDocumentButton_Click(object sender, RoutedEventArgs e)
