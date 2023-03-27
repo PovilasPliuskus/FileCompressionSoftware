@@ -15,6 +15,8 @@ using System.Windows.Shapes;
 using Microsoft.Win32;
 using System.IO;
 using System.Runtime.CompilerServices;
+using System.Diagnostics;
+using System.Security.Cryptography.Xml;
 
 namespace FileCompressionSoftware
 {
@@ -46,6 +48,7 @@ namespace FileCompressionSoftware
                 DADTextBlock.HorizontalAlignment= HorizontalAlignment.Left;
                 CompressButton.IsEnabled = true;
                 EncryptButton.IsEnabled = true;
+                DecryptButton.IsEnabled = true;
             }
         }
 
@@ -65,6 +68,7 @@ namespace FileCompressionSoftware
                 DADTextBlock.HorizontalAlignment = HorizontalAlignment.Left;
                 CompressButton.IsEnabled = true;
                 EncryptButton.IsEnabled = true;
+                DecryptButton.IsEnabled = true;
             }
         }
 
@@ -102,6 +106,42 @@ namespace FileCompressionSoftware
         {
             Compress compress = new Compress(selectedFileURL);
             compress.ShowDialog();
+        }
+
+        private void EncryptButton_Click(object sender, RoutedEventArgs e)
+        {
+            string arguments = $"/e {selectedFileURL}"; 
+
+            ProcessStartInfo startInfo = new ProcessStartInfo(@"C:\Windows\System32\cipher.exe", $"{arguments}");
+            startInfo.UseShellExecute = false;
+            startInfo.RedirectStandardOutput = true;
+
+            Process process = Process.Start(startInfo);
+
+            // Check if there was an error while encrypting
+            process.WaitForExit();
+            if(process.ExitCode == 0)
+            {
+
+            }
+        }
+
+        private void DectryptButton_Click(object sender, RoutedEventArgs e)
+        {
+            string arguments = $"/d {selectedFileURL}";
+
+            ProcessStartInfo startInfo = new ProcessStartInfo(@"C:\Windows\System32\cipher.exe", $"{arguments}");
+            startInfo.UseShellExecute = false;
+            startInfo.RedirectStandardOutput = true;
+
+            Process process = Process.Start(startInfo);
+
+            // Check if there was an error while decrypting
+            process.WaitForExit();
+            if (process.ExitCode == 0)
+            {
+
+            }
         }
     }
 
