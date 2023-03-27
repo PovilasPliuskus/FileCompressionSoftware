@@ -2,13 +2,26 @@
 
 void compress(const string input_file, const string output_file)
 {
+    // Extract the file extension
+    string extension = "";
+    size_t dot_pos = input_file.find_last_of(".");
+    if (dot_pos != string::npos) {
+        extension = input_file.substr(dot_pos);
+    }
+
+    int extensionLength = extension.length();
+
+    // Write the extension to the compressed file
+    ofstream outfile(output_file, ios::binary);
+    outfile.write((to_string(extensionLength)).c_str(), 1);
+    outfile.write(extension.c_str(), extension.size());
+
     unordered_map<string, int> dictionary;
     for (int i = 0; i < 256; i++) {
         dictionary[string(1, i)] = i;
     }
 
     ifstream infile(input_file, ios::binary);
-    ofstream outfile(output_file, ios::binary);
     string current;
     char c;
     int next_code = 256;
@@ -34,13 +47,30 @@ void compress(const string input_file, const string output_file)
 
 void decompress(const string input_file, const string output_file)
 {
+    // Read the file extension from the compressed file
+    ifstream infile(input_file, ios::binary);
+
+    char extensionLenghtCharacter;
+    infile.get(extensionLenghtCharacter);
+    int extensionLength = static_cast<int>(extensionLenghtCharacter) - 48; // substracting 48 to convert ascii code to an integer
+
+    string extension = "";
+
+    for (int i = 0; i < extensionLength; i++) {
+        char extensionChar;
+        infile.get(extensionChar);
+        extension += extensionChar;
+    }
+
     vector<string> dictionary(256);
     for (int i = 0; i < 256; i++) {
         dictionary[i] = string(1, i);
     }
 
-    ifstream infile(input_file, ios::binary);
-    ofstream outfile(output_file, ios::binary);
+    string fileName = output_file;
+    fileName += extension;
+
+    ofstream outfile(fileName, ios::binary);
     int current_code, previous_code;
     char c;
 
