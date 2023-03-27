@@ -66,7 +66,7 @@ namespace FileCompressionSoftware
             }
             if (!File.Exists(SelectedDocumentTextBox.Text))
             {
-                MessageBox.Show("Could not locate the selected document for compression");
+                MessageBox.Show("Could not locate the selected document for decompression");
                 return false;
             }
             return true;
@@ -87,7 +87,7 @@ namespace FileCompressionSoftware
 
                 if (extension == ".hfm")
                 {
-                    StatusTextBlock.Text = "Compressing";
+                    StatusTextBlock.Text = "Decompressing";
                     StatusTextBlock.Background = Brushes.Yellow;
 
                     string HuffmanAlgorithm = @"..\\..\\..\\HuffmanAlgorithm\\hfmDecompress.exe";
@@ -122,7 +122,7 @@ namespace FileCompressionSoftware
                         {
                             Dispatcher.Invoke(() =>
                             {
-                                StatusTextBlock.Text = "Successfully Compressed";
+                                StatusTextBlock.Text = "Successfully Decompressed";
                                 StatusTextBlock.Background = Brushes.Green;
                                 CompressionProgressBar.Value = 100;
                             });
@@ -131,7 +131,7 @@ namespace FileCompressionSoftware
                         {
                             Dispatcher.Invoke(() =>
                             {
-                                StatusTextBlock.Text = "Compression Failed";
+                                StatusTextBlock.Text = "Decompression Failed";
                                 StatusTextBlock.Background = Brushes.Red;
                                 CompressionProgressBar.Value = 0;
                             });
@@ -140,7 +140,7 @@ namespace FileCompressionSoftware
                 }
                 else if (extension == ".lz")
                 {
-                    StatusTextBlock.Text = "Compressing";
+                    StatusTextBlock.Text = "Decompressing";
                     StatusTextBlock.Background = Brushes.Yellow;
 
                     string LZAlgorithm = @"..\\..\\..\\LZAlgorithm\\LZDecompress.exe";
@@ -175,7 +175,7 @@ namespace FileCompressionSoftware
                         {
                             Dispatcher.Invoke(() =>
                             {
-                                StatusTextBlock.Text = "Successfully Compressed";
+                                StatusTextBlock.Text = "Successfully Decompressed";
                                 StatusTextBlock.Background = Brushes.Green;
                                 CompressionProgressBar.Value = 100;
                             });
@@ -184,7 +184,7 @@ namespace FileCompressionSoftware
                         {
                             Dispatcher.Invoke(() =>
                             {
-                                StatusTextBlock.Text = "Compression Failed";
+                                StatusTextBlock.Text = "Decompression Failed";
                                 StatusTextBlock.Background = Brushes.Red;
                                 CompressionProgressBar.Value = 0;
                             });
