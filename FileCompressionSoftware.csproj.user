@@ -10,9 +10,15 @@
     <Compile Update="Compress.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Decompress.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Compress.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Decompress.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MainWindow.xaml">
