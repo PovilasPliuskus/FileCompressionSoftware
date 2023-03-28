@@ -7,22 +7,31 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="500"
         ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
-    <Border BorderThickness="7">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="9*" />
-            </Grid.RowDefinitions>
-            
-            <StackPanel Name="ButtonStackPanel" Orientation="Horizontal" Grid.Row="0">
-                <Button Content="Compress" x:Name="CompressButton" Margin="5" Width="80" IsEnabled="False" Click="CompressButton_Click"/>
-                <Button Content="Decompress" x:Name="DecompressButton" Margin="5" Width="80" IsEnabled="False" Click="DecompressButton_Click"/>
-                <Button Content="Encrypt" x:Name="EncryptButton" Margin="5" Width="80" IsEnabled="False"/>
-            </StackPanel>
-            <Border BorderBrush="Gray" BorderThickness="1" Margin="10" Grid.Row="1" MouseLeftButtonDown="Border_MouseLeftButtonDown" Background="White"
-                    AllowDrop="True" Drop="Border_Drop" DragEnter="Border_DragEnter" DragOver="Border_DragOver">
-                <TextBlock Text="Drag and drop files here" x:Name="DADTextBlock" Foreground="Gray" VerticalAlignment="Center" HorizontalAlignment="Center" />
-            </Border>
-        </Grid>
-    </Border>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="7*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Name="ButtonStackPanel" Orientation="Horizontal" Grid.Row="0">
+            <Button Content="Compress" x:Name="CompressButton" Margin="5" Width="80" IsEnabled="False" Click="CompressButton_Click"/>
+            <Button Content="Decompress" x:Name="DecompressButton" Margin="5" Width="80" IsEnabled="False" Click="DecompressButton_Click"/>
+            <Button Content="Encrypt" x:Name="EncryptButton" Margin="5" Width="80" IsEnabled="False" Click="EncryptButton_Click"/>
+            <Button Content="Decrypt" x:Name="DecryptButton" Margin="5" Width="80" IsEnabled="False" Click="DectryptButton_Click"/>
+        </StackPanel>
+
+        <Border BorderBrush="Gray" BorderThickness="1" Margin="10" Grid.Row="1" MouseLeftButtonDown="Border_MouseLeftButtonDown" Background="White"
+                AllowDrop="True" Drop="Border_Drop" DragEnter="Border_DragEnter" DragOver="Border_DragOver">
+            <TextBlock Text="Drag and drop files here" x:Name="DADTextBlock" Foreground="Gray" VerticalAlignment="Center" HorizontalAlignment="Center" />
+        </Border>
+        
+        <GridSplitter Grid.Row="1" Height="2" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Background="Gray" ResizeDirection="Rows"/>
+
+        <Border BorderBrush="Gray" BorderThickness="1" Margin="10" Grid.Row="2" Background="White">
+            <TextBlock x:Name="MessagesTextBlock" Foreground="DarkGreen" TextWrapping="Wrap" Margin="10"/>
+        </Border>
+
+
+    </Grid>
 </Window>

@@ -15,6 +15,8 @@ using System.Windows.Shapes;
 using Microsoft.Win32;
 using System.IO;
 using System.Runtime.CompilerServices;
+using System.Diagnostics;
+using System.Windows;
 
 namespace FileCompressionSoftware
 {
@@ -47,6 +49,7 @@ namespace FileCompressionSoftware
                 CompressButton.IsEnabled = true;
                 EncryptButton.IsEnabled = true;
                 DecompressButton.IsEnabled = true;
+                DecryptButton.IsEnabled = true;
             }
         }
 
@@ -66,6 +69,7 @@ namespace FileCompressionSoftware
                 DADTextBlock.HorizontalAlignment = HorizontalAlignment.Left;
                 CompressButton.IsEnabled = true;
                 EncryptButton.IsEnabled = true;
+                DecryptButton.IsEnabled = true;
             }
         }
 
@@ -103,6 +107,55 @@ namespace FileCompressionSoftware
         {
             Compress compress = new Compress(selectedFileURL);
             compress.ShowDialog();
+        }
+
+        private void EncryptButton_Click(object sender, RoutedEventArgs e)
+        {
+            string arguments = $"/e {selectedFileURL}";
+            string cipherPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.System), "cipher.exe");
+
+            if (!File.Exists(cipherPath))
+            {
+                // code to execute if the cipher.exe does not exist
+            }
+
+            ProcessStartInfo startInfo = new ProcessStartInfo(@cipherPath, $"{arguments}");
+            startInfo.UseShellExecute = false;
+            startInfo.RedirectStandardOutput = true;
+
+            Process process = Process.Start(startInfo);
+
+            // Check if there was an error while encrypting
+            process.WaitForExit();
+            if(process.ExitCode == 0)
+            {
+                MessagesTextBlock.Text += "Encryption completed successfully\n";
+            }
+        }
+
+        private void DectryptButton_Click(object sender, RoutedEventArgs e)
+        {
+            string arguments = $"/d {selectedFileURL}";
+            string cipherPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.System), "cipher.exe");
+
+            if (!File.Exists(cipherPath))
+            {
+                // code to execute if the cipher.exe does not exist
+            }
+
+            ProcessStartInfo startInfo = new ProcessStartInfo(@cipherPath , $"{arguments}");
+            startInfo.UseShellExecute = false;
+            startInfo.RedirectStandardOutput = true;
+
+            Process process = Process.Start(startInfo);
+
+            // Check if there was an error while decrypting
+            process.WaitForExit();
+
+            if (process.ExitCode == 0)
+            {
+                MessagesTextBlock.Text += "Decryption completed successfully\n";
+            }
         }
 
         private void DecompressButton_Click(object sender, RoutedEventArgs e)
