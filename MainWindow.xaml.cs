@@ -32,6 +32,7 @@ namespace FileCompressionSoftware
 
         // selectedFileURL - the absolute address of the file
         string selectedFileURL;
+        int lineCounterForLastSection = 0;
 
         private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -109,27 +110,44 @@ namespace FileCompressionSoftware
             compress.ShowDialog();
         }
 
+        void printLineInLastSection(string message, string date)
+        {
+            if (lineCounterForLastSection == 4)
+            {
+                MessagesTextBlock.Text = message + "\t\t\t\t" + date + '\n';
+                lineCounterForLastSection = 0;
+            }
+            else
+            {
+                MessagesTextBlock.Text += message + "\t\t\t\t" + date + '\n';
+            }
+            lineCounterForLastSection++;
+        }
+
         private void EncryptButton_Click(object sender, RoutedEventArgs e)
         {
             string arguments = $"/e {selectedFileURL}";
             string cipherPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.System), "cipher.exe");
+            DateTime now = DateTime.Now;
+            string dateNow = now.ToString("yyyy-MM-dd HH:mm:ss");
 
             if (!File.Exists(cipherPath))
             {
-                // code to execute if the cipher.exe does not exist
+                MessagesTextBlock.Foreground = Brushes.Red;
+                printLineInLastSection("cipher.exe file does not exist", dateNow);
             }
-
-            ProcessStartInfo startInfo = new ProcessStartInfo(@cipherPath, $"{arguments}");
-            startInfo.UseShellExecute = false;
-            startInfo.RedirectStandardOutput = true;
-
-            Process process = Process.Start(startInfo);
-
-            // Check if there was an error while encrypting
-            process.WaitForExit();
-            if(process.ExitCode == 0)
+            else
             {
-                MessagesTextBlock.Text += "Encryption completed successfully\n";
+                ProcessStartInfo startInfo = new ProcessStartInfo(@cipherPath, $"{arguments}");
+                startInfo.UseShellExecute = false;
+                startInfo.RedirectStandardOutput = true;
+
+                Process process = Process.Start(startInfo);
+
+                // Check if there was an error while encrypting
+                process.WaitForExit();
+                if(process.ExitCode == 0)
+                    printLineInLastSection("File encrypted successfully", dateNow);
             }
         }
 
@@ -137,24 +155,28 @@ namespace FileCompressionSoftware
         {
             string arguments = $"/d {selectedFileURL}";
             string cipherPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.System), "cipher.exe");
+            DateTime now = DateTime.Now;
+            string dateNow = now.ToString("yyyy-MM-dd HH:mm:ss");
 
             if (!File.Exists(cipherPath))
             {
-                // code to execute if the cipher.exe does not exist
+                MessagesTextBlock.Foreground = Brushes.Red;
+                printLineInLastSection("cipher.exe file does not exist", dateNow);
             }
-
-            ProcessStartInfo startInfo = new ProcessStartInfo(@cipherPath , $"{arguments}");
-            startInfo.UseShellExecute = false;
-            startInfo.RedirectStandardOutput = true;
-
-            Process process = Process.Start(startInfo);
-
-            // Check if there was an error while decrypting
-            process.WaitForExit();
-
-            if (process.ExitCode == 0)
+            else
             {
-                MessagesTextBlock.Text += "Decryption completed successfully\n";
+                ProcessStartInfo startInfo = new ProcessStartInfo(@cipherPath , $"{arguments}");
+                startInfo.UseShellExecute = false;
+                startInfo.RedirectStandardOutput = true;
+
+                Process process = Process.Start(startInfo);
+
+                // Check if there was an error while decrypting
+                process.WaitForExit();
+
+                process.WaitForExit();
+                if (process.ExitCode == 0)
+                    printLineInLastSection("File decrypted successfully", dateNow);
             }
         }
 
