@@ -16,7 +16,7 @@ using Microsoft.Win32;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Diagnostics;
-using System.Security.Cryptography.Xml;
+using System.Windows;
 
 namespace FileCompressionSoftware
 {
@@ -111,9 +111,15 @@ namespace FileCompressionSoftware
 
         private void EncryptButton_Click(object sender, RoutedEventArgs e)
         {
-            string arguments = $"/e {selectedFileURL}"; 
+            string arguments = $"/e {selectedFileURL}";
+            string cipherPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.System), "cipher.exe");
 
-            ProcessStartInfo startInfo = new ProcessStartInfo(@"C:\Windows\System32\cipher.exe", $"{arguments}");
+            if (!File.Exists(cipherPath))
+            {
+                // code to execute if the cipher.exe does not exist
+            }
+
+            ProcessStartInfo startInfo = new ProcessStartInfo(@cipherPath, $"{arguments}");
             startInfo.UseShellExecute = false;
             startInfo.RedirectStandardOutput = true;
 
@@ -123,15 +129,21 @@ namespace FileCompressionSoftware
             process.WaitForExit();
             if(process.ExitCode == 0)
             {
-
+                MessagesTextBlock.Text += "Encryption completed successfully\n";
             }
         }
 
         private void DectryptButton_Click(object sender, RoutedEventArgs e)
         {
             string arguments = $"/d {selectedFileURL}";
+            string cipherPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.System), "cipher.exe");
 
-            ProcessStartInfo startInfo = new ProcessStartInfo(@"C:\Windows\System32\cipher.exe", $"{arguments}");
+            if (!File.Exists(cipherPath))
+            {
+                // code to execute if the cipher.exe does not exist
+            }
+
+            ProcessStartInfo startInfo = new ProcessStartInfo(@cipherPath , $"{arguments}");
             startInfo.UseShellExecute = false;
             startInfo.RedirectStandardOutput = true;
 
@@ -139,9 +151,10 @@ namespace FileCompressionSoftware
 
             // Check if there was an error while decrypting
             process.WaitForExit();
+
             if (process.ExitCode == 0)
             {
-
+                MessagesTextBlock.Text += "Decryption completed successfully\n";
             }
         }
 
