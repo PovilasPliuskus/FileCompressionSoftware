@@ -1,9 +1,15 @@
 # FileCompressionSoftware
-A software application that allows users to compress and decompress files including additional features such as selecting the compression format or file encryption/decryption.
+
+A software application that allows users to compress and decompress files, including additional features such as selecting the compression format or file encryption/decryption.
+
 ## Features
-* File compression format selection
-* Multi-file encryption/decryption
-* User-friendly interface
+
+- **File compression format selection:** Users can select the compression format they want to use for their files, such as Huffman or Lempel-Ziv.
+
+- **Multi-file encryption/decryption:** Users can encrypt or decrypt multiple files at once, making the process more efficient.
+
+- **User-friendly interface:** The software has a simple and intuitive interface, making it easy for users to navigate and use.
+
 
 -------
 
