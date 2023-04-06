@@ -9,9 +9,9 @@ A software application that allows users to compress and decompress files includ
 
 ## Future perspectives
 * Switch from using .exe (Executable) files to .dll (Dynamic Link Library) files
-*** This change is expected to improve the performance of the application by reducing load times, as well as providing greater flexibility in terms of program   functionality. ***
+***This change is expected to improve the performance of the application by reducing load times, as well as providing greater flexibility in terms of program   functionality.***
 * Add keyboard shortcuts
-*** This change is expected to make it easier for users to perform certain actions while using the application. ***
+***This change is expected to make it easier for users to perform certain actions while using the application.***
 * Explore additional design options and modify the current interface to create a more user-friendly experience
 * Add multi-file compression/decompression functionality
 
